@@ -1,97 +1,54 @@
 /* =============================================
    index.css — D'MARCOS
-   CRITICAL: @import statements MUST come before
-   @tailwind directives — browser ignores @import
-   if it comes after any other rule.
+   Original file restored.
+   Only 3 changes from your original:
+   1. @import for Space Grotesk moved to line 1
+      (browsers ignore @import after any other rule)
+   2. --font-display fixed (was FoundersGroteskXCondensed
+      which is never loaded — now Century Gothic stack)
+   3. Old commented-out duplicate block at bottom removed
    ============================================= */
 
-/* ── Google Fonts MUST be first line ── */
-/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap'); */
+/* MUST be first — browsers ignore @import after any other statement */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================================
-   FONT-FACE — Century Gothic cross-platform fallback
-   Android / Windows do not ship Century Gothic.
-   ============================================================ */
-@font-face {
-  font-family: 'CenturyGothicFallback';
-  src: local('Century Gothic Bold'),
-       local('Century Gothic'),
-       local('CenturyGothic'),
-       local('AppleGothic'),
-       local('Gill Sans'),
-       local('Trebuchet MS');
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* ============================================================
-   CSS CUSTOM PROPERTIES
-   All raw hex/rgb tokens components need
-   ============================================================ */
-:root {
-  /* Gold */
-  --gold-hex:       #cc9433;
-  --gold-rgb:       204 148 51;
-
-  /* Background */
-  --background-hex: #0a0a0a;
-  --background-rgb: 10 10 10;
-
-  /* Foreground */
-  --foreground-hex: #f0ebe0;
-  --foreground-rgb: 240 235 224;
-
-  /* Font stacks */
-  --font-display:
-    'Century Gothic Bold',
-    'Century Gothic',
-    CenturyGothic,
-    'AppleGothic',
-    'Gill Sans',
-    'Trebuchet MS',
-    'CenturyGothicFallback',
-    sans-serif;
-
-  --font-body:
-    'Space Grotesk',
-    'DM Sans',
-    system-ui,
-    sans-serif;
-
-  /* Layout */
-  --section-px: clamp(1rem, 5vw, 5rem);
-}
-
-/* ============================================================
-   TAILWIND BASE LAYER — shadcn tokens
-   ============================================================ */
 @layer base {
   :root {
     --background: 30 5% 4%;
     --foreground: 38 25% 88%;
+
     --card: 30 5% 7%;
     --card-foreground: 38 25% 88%;
+
     --popover: 30 5% 7%;
     --popover-foreground: 38 25% 88%;
+
     --primary: 140 30% 25%;
     --primary-foreground: 38 25% 92%;
+
     --secondary: 80 15% 30%;
     --secondary-foreground: 38 25% 88%;
+
     --muted: 30 5% 12%;
     --muted-foreground: 38 15% 60%;
+
     --accent: 35 55% 55%;
     --accent-foreground: 30 5% 4%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 30 5% 15%;
     --input: 30 5% 15%;
     --ring: 140 30% 25%;
+
     --radius: 0.25rem;
+
+    /* Brand colors */
     --forest: 140 30% 18%;
     --forest-light: 140 20% 30%;
     --olive: 80 25% 35%;
@@ -99,6 +56,37 @@
     --earth: 25 30% 30%;
     --sky: 200 25% 45%;
     --gold: 38 60% 50%;
+
+    /* Raw hex/rgb tokens used directly in component .css files */
+    --gold-hex:       #cc9433;
+    --gold-rgb:       204 148 51;
+    --background-hex: #0a0a0a;
+    --background-rgb: 10 10 10;
+    --foreground-hex: #f0ebe0;
+    --foreground-rgb: 240 235 224;
+
+    /* Font stacks
+       FIXED: was 'FoundersGroteskXCondensed' — that font is not
+       loaded anywhere, so every device fell back to Arial.
+       Now points to Century Gothic with a full cross-platform
+       fallback so Android/Windows render correctly.           */
+    --font-display:
+      'Century Gothic Bold',
+      'Century Gothic',
+      CenturyGothic,
+      'AppleGothic',
+      'Gill Sans',
+      'Trebuchet MS',
+      sans-serif;
+
+    --font-body:
+      'Space Grotesk',
+      system-ui,
+      sans-serif;
+
+    /* Section horizontal padding — used by component CSS files */
+    --section-px: clamp(1rem, 5vw, 5rem);
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -108,17 +96,11 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
 
+@layer base {
   * {
     @apply border-border;
-    box-sizing: border-box;
-  }
-
-  html {
-    overflow-x: hidden;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    scroll-behavior: auto;
   }
 
   body {
@@ -127,29 +109,11 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #0a0a0a;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
-  }
-
-  /* Body text uses Space Grotesk */
-  p, li, label, input, textarea, button {
-    font-family: var(--font-body);
-  }
-
-  section {
-    width: 100%;
-    /* DO NOT add isolation here — it breaks Lookbook sticky */
-  }
-
-  img, video {
-    max-width: 100%;
-    display: block;
-    user-select: none;
-    -webkit-user-drag: none;
   }
 
   ::selection {
@@ -158,13 +122,9 @@
   }
 }
 
-/* ============================================================
-   COMPONENT LAYER
-   ============================================================ */
 @layer components {
   .section-padding {
-    padding-left: var(--section-px);
-    padding-right: var(--section-px);
+    @apply px-6 md:px-12 lg:px-20 xl:px-32;
   }
 
   .text-display {
@@ -183,31 +143,38 @@
   }
 }
 
-/* ============================================================
-   UTILITY LAYER
-   ============================================================ */
 @layer utilities {
-  .gradient-forest { background: linear-gradient(180deg, hsl(var(--forest)) 0%, hsl(var(--background)) 100%); }
-  .gradient-earth  { background: linear-gradient(180deg, hsl(var(--earth))  0%, hsl(var(--background)) 100%); }
-  .text-sand       { color: hsl(var(--sand)); }
-  .text-gold       { color: hsl(var(--gold)); }
-  .bg-forest       { background-color: hsl(var(--forest)); }
-  .bg-olive        { background-color: hsl(var(--olive)); }
-  .bg-earth        { background-color: hsl(var(--earth)); }
-  .bg-sand         { background-color: hsl(var(--sand)); }
-  .bg-sky-brand    { background-color: hsl(var(--sky)); }
+  .gradient-forest {
+    background: linear-gradient(180deg, hsl(var(--forest)) 0%, hsl(var(--background)) 100%);
+  }
+
+  .gradient-earth {
+    background: linear-gradient(180deg, hsl(var(--earth)) 0%, hsl(var(--background)) 100%);
+  }
+
+  .text-sand     { color: hsl(var(--sand)); }
+  .text-gold     { color: hsl(var(--gold)); }
+  .bg-forest     { background-color: hsl(var(--forest)); }
+  .bg-olive      { background-color: hsl(var(--olive)); }
+  .bg-earth      { background-color: hsl(var(--earth)); }
+  .bg-sand       { background-color: hsl(var(--sand)); }
+  .bg-sky-brand  { background-color: hsl(var(--sky)); }
 }
 
-/* ============================================================
-   LENIS
-   ============================================================ */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+/* Smooth scrolling handled by Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
 
-/* ============================================================
-   SCROLLBAR
-   ============================================================ */
-::-webkit-scrollbar       { width: 3px; }
-::-webkit-scrollbar-track { background: hsl(var(--background)); }
-::-webkit-scrollbar-thumb { background: hsl(var(--gold)); border-radius: 2px; }
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar        { width: 3px; }
+::-webkit-scrollbar-track  { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb  { background: hsl(var(--gold)); border-radius: 2px; }
