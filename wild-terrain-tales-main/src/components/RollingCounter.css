@@ -1,0 +1,20 @@
+/* =============================================
+   ROLLING COUNTER — D'MARCOS
+   ============================================= */
+
+.rolling-counter {
+  display: inline-flex;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.rolling-counter__col {
+  display: inline-block;
+  overflow: hidden;
+  /* Each column clips its sliding char */
+}
+
+.rolling-counter__char {
+  display: inline-block;
+  will-change: transform, opacity;
+}

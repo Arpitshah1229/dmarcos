@@ -1,0 +1,171 @@
+/* =============================================
+   GLOBAL — D'MARCOS
+   global.css / index.css  (import this FIRST)
+   ============================================= */
+
+/* ── Google Fonts preconnect (add these tags to index.html too) ── */
+/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap'); */
+
+/* ============================================================
+   FONT-FACE — Century Gothic safe cross-platform stack
+   Android does NOT ship Century Gothic. We define a fallback
+   chain so the display weight always renders correctly.
+   ============================================================ */
+@font-face {
+  font-family: 'CenturyGothicFallback';
+  src: local('Century Gothic'),
+       local('CenturyGothic'),
+       local('Century Gothic Bold'),
+       local('AppleGothic'),          /* iOS fallback              */
+       local('Gill Sans'),            /* macOS / older iOS         */
+       local('Trebuchet MS');         /* Windows / Android         */
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── CSS Custom Properties ── */
+:root {
+  /* Brand tokens */
+  --gold:            #cc9433;
+  --gold-rgb:        201 168 76;
+  --background:      #0a0a0a;
+  --background-rgb:  10 10 10;
+  --foreground:      #f5f5f0;
+  --foreground-rgb:  245 245 240;
+
+  /* Typography stacks */
+  --font-display:
+    'Century Gothic Paneuropean Bold',
+    'Century Gothic Bold',
+    'Century Gothic Paneuropean',
+    'Century Gothic',
+    CenturyGothic,
+    'AppleGothic',
+    'Gill Sans',
+    'Trebuchet MS',
+    'CenturyGothicFallback',
+    sans-serif;
+
+  --font-body: 'Space Grotesk', 'Arial', system-ui, sans-serif;
+
+  /* Layout */
+  --section-px: clamp(1rem, 5vw, 4rem);
+
+  /* Smooth scrollbar width compensation */
+  --scrollbar-w: 0px;
+}
+
+/* ── Base resets ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Prevent horizontal overflow on ALL devices */
+  overflow-x: hidden;
+  /* iOS momentum scroll */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto; /* Lenis handles this */
+  /* Prevent font size inflation on Android */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  /* Prevent white flash on load */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Section padding utility ── */
+.section-padding {
+  padding-left: var(--section-px);
+  padding-right: var(--section-px);
+}
+
+/* ── Container ── */
+.container {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Prevent image drag / selection ── */
+img, video {
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ── Hide scrollbar but keep scroll ── */
+::-webkit-scrollbar { width: 0; background: transparent; }
+
+/* ── Tailwind base overrides to ensure no overflow ── */
+.overflow-hidden { overflow: hidden !important; }
+
+/* ============================================================
+   PERFORMANCE GLOBALS
+   ============================================================ */
+
+/* Promote sections that use parallax to their own layers */
+section {
+  isolation: isolate;
+}
+
+/* Ensure videos never cause layout overflow */
+video {
+  max-width: 100%;
+  display: block;
+}
+
+/* ============================================================
+   MOBILE-FIRST TYPOGRAPHY SCALE
+   ============================================================ */
+
+/* These mirror the Tailwind text-display / text-utility classes
+   but are explicit so they work without Tailwind's JIT */
+.text-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+}
+
+.text-utility {
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   PRELOADER — prevents layout shift during font load
+   ============================================================ */
+.fonts-loading * {
+  visibility: hidden;
+}
+.fonts-loaded * {
+  visibility: visible;
+}
+
+/* ============================================================
+   RESPONSIVE HELPERS
+   ============================================================ */
+
+/* Only show on mobile */
+.mobile-only {
+  display: block;
+}
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-only  { display: none; }
+  .desktop-only { display: block; }
+}

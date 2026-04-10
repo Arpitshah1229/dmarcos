@@ -1,0 +1,161 @@
+/* =============================================
+   PRODUCT BUILD — D'MARCOS  (REVISED)
+   ============================================= */
+
+:root {
+  --pb-font-display: var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  --pb-font-body:    var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  --pb-title-size:   clamp(2rem, 6vw, 4.5rem);
+  --pb-card-title:   clamp(0.875rem, 1.2vw, 1.25rem);
+  --pb-card-sub:     clamp(0.8rem, 0.9vw, 1rem);
+  --pb-py:           clamp(2rem, 8vw, 8rem);
+}
+
+.product-build {
+  padding: var(--pb-py) var(--section-px, 1.25rem);
+
+   /* Ensure this section is never isolated — breaks parallax */
+  isolation: auto;
+}
+
+.product-build__header { margin-bottom: 3.5rem; }
+
+.product-build__eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold, #cc9433);
+  margin-bottom: 1rem;
+  /* will-change: transform, opacity; */
+}
+
+.product-build__title {
+  font-family: var(--font-display);
+  font-size: var(--pb-title-size);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--foreground, #f5f5f0);
+  line-height: 0.9;
+  overflow: hidden;
+}
+
+.product-build__title span {
+  font-family: var(--pb-font-display);
+  display: inline-block;
+  margin-right: 0.25em;
+  will-change: transform, opacity;
+}
+
+.product-build__title span.muted { opacity: 0.5; color: rgba(var(--foreground-rgb,245 245 240)/.5); }
+
+.product-build__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  /* All 4 items always visible */
+  align-items: start;
+}
+
+.product-build__card {
+  position: relative;
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+
+   /* Ensure the card is always in the render tree */
+  min-height: 0;
+}
+
+.product-build__img-ratio {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin-bottom: 0.875em;
+  position: relative;
+
+   /* Force browser to always paint this */
+  contain: layout style;
+}
+
+.product-build__img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  /* content-visibility: auto; */
+}
+
+.product-build__wipe {
+  position: absolute;
+  inset: 0;
+  background-color: var(--background, #0a0a0a);
+  transform-origin: right center;
+  will-change: transform;
+}
+
+.product-build__hover-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--background-rgb,10 10 10)/.1);
+  transition: background-color 500ms ease;
+}
+
+.product-build__card:hover .product-build__hover-overlay { background-color: transparent; }
+
+.product-build__meta { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.product-build__index {
+  font-size: clamp(14px,1.2vw,20px);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(var(--gold-rgb,201 168 76)/.4);
+  font-weight: 500;
+  will-change: opacity;
+}
+
+.product-build__card-title {
+  font-family: var(--pb-font-display);
+  font-size: var(--pb-card-title);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--foreground, #f5f5f0);
+  /* will-change: transform, opacity; */
+}
+
+.product-build__card-sub {
+  font-family: var(--pb-font-body);
+  font-size: var(--pb-card-sub);
+  color: rgba(255 255 255/.8);
+  line-height: 1.6;
+  /* will-change: transform, opacity; */
+}
+
+/* RESPONSIVE */
+@media (max-width: 359px) {
+  :root { --pb-title-size: clamp(1.8rem,12vw,2.8rem); --pb-py: 3rem; }
+  .product-build__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .product-build__header { margin-bottom: 2.5rem; }
+}
+
+@media (min-width: 360px) and (max-width: 479px) {
+  :root { --pb-title-size: clamp(2rem,11vw,3rem); --pb-py: 3.5rem; }
+  .product-build__grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .product-build__header { margin-bottom: 2.5rem; }
+}
+
+@media (min-width: 480px) and (max-width: 639px) {
+  :root { --pb-title-size: clamp(2.2rem,8vw,3.5rem); }
+  .product-build__grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root { --pb-title-size: clamp(2.5rem,6vw,4rem); }
+  .product-build__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+  .product-build__grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-build__img, .product-build__card { will-change: auto; }
+}

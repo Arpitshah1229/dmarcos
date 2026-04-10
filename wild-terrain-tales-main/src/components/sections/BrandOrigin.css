@@ -1,0 +1,273 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============================================
+   BRAND ORIGIN — D'MARCOS
+   ============================================= */
+
+:root {
+    --bo-font-display: 'Century Gothic Paneuropean Bold', 'Century Gothic Bold',
+        'Century Gothic', CenturyGothic, sans-serif;
+    --bo-font-body: 'Space Grotesk', sans-serif;
+    --bo-title-size: clamp(4.5rem, 8vw, 7.5rem);
+    --bo-our-size: clamp(7rem, 11vw, 6.5rem);
+    --bo-body-size: clamp(1rem, 1.3vw, 1.25rem);
+    --bo-body-size-sm: clamp(0.95rem, 1.2vw, 1.15rem);
+    --bo-counter-size: clamp(1.875rem, 3vw, 2.5rem);
+    --bo-py: clamp(4rem, 8vw, 8rem);
+    --bo-gap: clamp(2.5rem, 5vw, 6rem);
+}
+
+/* ── Section ── */
+.brand-origin {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: var(--bo-py) var(--section-px, 1.5rem);
+}
+
+/* ── Grid ── */
+.brand-origin__grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--bo-gap);
+    align-items: center;
+} 
+
+/* ── Text column ── */
+ .brand-origin__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    will-change: transform;
+   
+}  
+
+/* ── Gold rule ── */
+.brand-origin__rule {
+    height: 2px;
+    background-color: #cc9433;
+    width: 100%;
+    overflow: hidden; 
+    /* Framer animates width from 0 → 80px */
+} 
+
+/* ── "our" label ── */
+ .brand-origin__our {
+    font-family: var(--bo-font-display);
+    font-size: var(--bo-our-size);
+    color: #cc9433;
+    text-align: center;
+    letter-spacing: 0;
+    margin-bottom: -2.3rem;
+    margin-left: 0rem;
+    margin-top: 0.5rem;
+
+    line-height: 1;
+    will-change: transform, opacity, filter;
+} 
+
+/* ── Title overflow mask ── */
+ .brand-origin__title-wrap {
+    overflow: hidden;
+} 
+
+/* ── Main title ── */
+.brand-origin__title {
+    font-family: var(--bo-font-display);
+    font-size: var(--bo-title-size);
+    
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--foreground, #fff);
+    line-height: 0.9;
+    margin-top: -0.5rem;
+    will-change: transform, opacity;
+} 
+
+/* ── Divider ── */
+ .brand-origin__divider {
+    height: 2px;
+    width: 4rem;
+    background-color: rgba(var(--gold-rgb, 201 168 76) / 0.4);
+    transform-origin: center;
+    will-change: transform;
+} 
+
+/* ── Body paragraphs ── */
+ .brand-origin__para {
+    font-family: var(--bo-font-body);
+    font-size: var(--bo-body-size);
+    line-height: 1.7;
+    color: rgba(255 255 255 / 0.75);
+    max-width: 42rem;
+    /* margin: 0 auto 1rem;  */
+    will-change: transform, opacity, filter;
+}
+
+ .brand-origin__para--sm {
+    font-size: var(--bo-body-size-sm);
+    line-height: 1.8;
+}
+
+.brand-origin__strong {
+    font-weight: 700;
+    color: #fff;
+}
+
+.brand-origin__sky {
+    color: #7992A8;
+    font-weight: 700;
+}
+
+.brand-origin__land {
+    color: #826F63;
+    font-weight: 700;
+}
+
+.brand-origin__water {
+    color: #3D4D65;
+    font-weight: 700;
+} 
+
+/* ── Stats row ── */
+ .brand-origin__stats {
+    display: flex;
+    gap: 3rem;
+    padding-top: 1rem;
+    will-change: transform, opacity;
+}
+
+.brand-origin__stat-value {
+    font-size: var(--bo-counter-size);
+    font-weight: 900;
+    color: #cc9433;
+    line-height: 1;
+    overflow: visible;
+}
+
+.brand-origin__stat-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: white;
+    margin-top: 0.25rem;
+} 
+
+/* ── Image column ── */
+ .brand-origin__img-wrap {
+    position: relative;
+    overflow: hidden;
+    will-change: transform, opacity;
+}
+
+.brand-origin__img-ratio {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.brand-origin__img {
+    height: 120%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    
+    will-change: transform;
+} 
+
+/* Wipe reveal overlay — Framer drives scaleX */
+ .brand-origin__wipe {
+    position: absolute;
+    inset: 0;
+    background-color: var(--background, #000);
+    transform-origin: right center;
+    will-change: transform;
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+/* Mobile ≤ 640px */
+ @media (max-width: 640px) {
+    :root {
+        --bo-our-size: clamp(2.8rem, 14vw, 4.5rem);
+        --bo-title-size: clamp(3.5rem, 16vw, 5.5rem);
+        --bo-body-size: 1rem;
+        --bo-body-size-sm: 0.95rem;
+        --bo-gap: 3rem;
+        --bo-py: 4rem;
+    }
+
+    .brand-origin__our {
+        margin-bottom: -2rem;
+    }
+
+    .brand-origin__para {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .brand-origin__stats {
+        gap: 2rem;
+    } */
+
+    /* Stack image below text on mobile */
+     .brand-origin__grid {
+        grid-template-columns: 1fr;
+    }
+} 
+
+/* Tablet 641–1023px */
+ @media (min-width: 641px) and (max-width: 1023px) {
+    :root {
+        --bo-our-size: clamp(4rem, 8vw, 5.5rem);
+        --bo-title-size: clamp(4.5rem, 10vw, 6rem);
+        --bo-body-size: 1.1rem;
+        --bo-gap: 4rem;
+    }
+
+    .brand-origin__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .brand-origin__para {
+        max-width: 100%;
+    }
+}
+
+/* Desktop ≥ 1024px */
+ @media (min-width: 1024px) {
+    .brand-origin__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--bo-gap);
+    }
+} 
+
+/* Reduced motion */
+ @media (prefers-reduced-motion: reduce) {
+
+    .brand-origin__text,
+    .brand-origin__img-wrap,
+    .brand-origin__img,
+    .brand-origin__para,
+    .brand-origin__our,
+    .brand-origin__title,
+    .brand-origin__stats {
+        will-change: auto;
+    }
+}

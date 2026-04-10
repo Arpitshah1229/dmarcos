@@ -1,0 +1,170 @@
+/* =============================================
+   PHILOSOPHY — D'MARCOS  (REVISED)
+   ============================================= */
+
+:root {
+  --ph-font-display: var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  --ph-font-body:    var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  --ph-why-size:     clamp(2rem, 7vw, 7rem);
+  --ph-us-size:      clamp(3.5rem, 10vw, 9rem);
+  --ph-body-size:    clamp(0.9rem, 1.3vw, 1.375rem);
+  --ph-py:           clamp(4rem, 8vw, 8rem);
+  --ph-avatar:       8rem;
+}
+
+.philosophy {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+.philosophy__bg {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.philosophy__bg-img {
+  height: 130%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  filter: brightness(1.3);
+  display: block;
+}
+
+.philosophy__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--background-rgb, 10 10 10) / 0.4);
+}
+
+.philosophy__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding: var(--ph-py) var(--section-px, 1.25rem);
+}
+
+.philosophy__inner { width: 100%; max-width: 72rem; margin: 0 auto; }
+
+.philosophy__text { display: flex; flex-direction: column; gap: 2rem; }
+
+.philosophy__heading-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.philosophy__why {
+  font-family: var(--ph-font-display);
+  font-size: var(--ph-why-size);
+  color: #cc9433;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  will-change: transform, opacity;
+}
+
+.philosophy__us {
+  font-family: var(--ph-font-display);
+  font-weight: 700;
+  font-size: var(--ph-us-size);
+  text-transform: uppercase;
+  color: var(--foreground, #f5f5f0);
+  line-height: 1;
+  will-change: transform, opacity;
+}
+
+.philosophy__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 48rem;
+  will-change: transform, opacity;
+}
+
+.philosophy__para {
+  font-family: var(--ph-font-body);
+  font-size: var(--ph-body-size);
+  line-height: 1.7;
+  color: rgba(255 255 255 / 0.8);
+}
+
+.philosophy__founders {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding-top: 1.5rem;
+  will-change: transform, opacity;
+  flex-wrap: wrap;
+}
+
+.philosophy__founder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.philosophy__avatar {
+  width: var(--ph-avatar);
+  height: var(--ph-avatar);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(234 179 8 / 0.7);
+  flex-shrink: 0;
+}
+
+.philosophy__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.95) contrast(1.05);
+  will-change: transform;
+}
+
+.philosophy__linkedin {
+  font-size: 1rem;
+  color: rgba(234 179 8 / 0.8);
+  text-decoration: none;
+  transition: color 300ms ease;
+}
+
+.philosophy__linkedin:hover { color: rgba(var(--foreground-rgb,245 245 240)/.7); }
+
+/* RESPONSIVE */
+@media (max-width: 359px) {
+  :root { --ph-why-size: clamp(1.8rem,11vw,2.5rem); --ph-us-size: clamp(3rem,16vw,4.5rem); --ph-body-size: 0.875rem; --ph-py: 3.5rem; --ph-avatar: 6rem; }
+  .philosophy__body { max-width: 100%; }
+  .philosophy__founders { gap: 1.5rem; }
+}
+
+@media (min-width: 360px) and (max-width: 479px) {
+  :root { --ph-why-size: clamp(2rem,11vw,3rem); --ph-us-size: clamp(3.5rem,16vw,5rem); --ph-body-size: 0.9rem; --ph-py: 3.5rem; --ph-avatar: 6.5rem; }
+  .philosophy__body { max-width: 100%; }
+}
+
+@media (min-width: 480px) and (max-width: 639px) {
+  :root { --ph-why-size: clamp(2.5rem,9vw,4rem); --ph-us-size: clamp(4rem,13vw,6rem); --ph-body-size: 0.95rem; }
+  .philosophy__body { max-width: 100%; }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root { --ph-why-size: clamp(3rem,7vw,5rem); --ph-us-size: clamp(5rem,11vw,7rem); --ph-body-size: 1rem; }
+  .philosophy__body { max-width: 100%; }
+  .philosophy__avatar { width: 8rem; height: 8rem; }
+}
+
+@media (min-width: 1024px) {
+  .philosophy__avatar { width: 10rem; height: 10rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .philosophy__bg, .philosophy__avatar-img, .philosophy__why, .philosophy__us, .philosophy__para { will-change: auto; }
+}

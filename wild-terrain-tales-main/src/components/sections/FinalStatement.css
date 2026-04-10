@@ -1,0 +1,121 @@
+/* =============================================
+   FINAL STATEMENT — D'MARCOS
+   ============================================= */
+
+
+ 
+:root {
+  --fs-font-display: var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  --fs-line1-size: clamp(1.4rem, 3.5vw, 3rem);
+  --fs-line2-size: clamp(1.75rem, 4.5vw, 3.75rem);
+  --fs-line3-size: clamp(2.1rem, 5.5vw, 4.5rem);
+}
+ 
+.final-statement {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+ 
+.final-statement__bg {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transform: translateZ(0);
+}
+ 
+.final-statement__bg-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 1;
+  filter: brightness(1.4);
+  display: block;
+}
+ 
+.final-statement__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--background-rgb,10 10 10)/.1);
+}
+ 
+.final-statement__content {
+  font-family: var(--fs-font-display);
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0 1.25rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+ 
+.final-statement__lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+ 
+.final-statement__line-wrap { overflow: hidden; }
+ 
+.final-statement__line {
+  font-family: var(--fs-font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--foreground, #f5f5f0);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  will-change: transform, opacity;
+}
+ 
+.final-statement__line--1 { font-size: var(--fs-line1-size); }
+.final-statement__line--2 { font-size: var(--fs-line2-size); }
+.final-statement__line--3 { font-size: var(--fs-line3-size); }
+ 
+.final-statement__gold { color: #cc9433; font-family: var(--fs-font-display); }
+ 
+.final-statement__vignette {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 10rem;
+  background: linear-gradient(to top, rgba(var(--background-rgb,10 10 10)/.4) 0%, transparent 100%);
+  pointer-events: none;
+}
+ 
+/* RESPONSIVE */
+@media (max-width: 359px) {
+  :root { --fs-line1-size: clamp(1.2rem,7vw,1.8rem); --fs-line2-size: clamp(1.5rem,8.5vw,2.2rem); --fs-line3-size: clamp(1.8rem,10vw,2.8rem); }
+  .final-statement__lines { gap: 0.4rem; }
+}
+ 
+@media (min-width: 360px) and (max-width: 479px) {
+  :root { --fs-line1-size: clamp(1.4rem,7vw,2rem); --fs-line2-size: clamp(1.75rem,8.5vw,2.5rem); --fs-line3-size: clamp(2.1rem,10vw,3rem); }
+}
+ 
+@media (min-width: 480px) and (max-width: 639px) {
+  :root { --fs-line1-size: clamp(1.6rem,4vw,2.2rem); --fs-line2-size: clamp(2rem,5vw,2.8rem); --fs-line3-size: clamp(2.4rem,6vw,3.4rem); }
+}
+ 
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root { --fs-line1-size: clamp(1.8rem,3.5vw,2.5rem); --fs-line2-size: clamp(2.2rem,4.5vw,3rem); --fs-line3-size: clamp(2.8rem,5.5vw,3.75rem); }
+}
+ 
+@media (min-width: 1024px) {
+  .final-statement__lines { gap: 1rem; }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  .final-statement__bg, .final-statement__line { will-change: auto; }
+}
+
+
+
+
+
+
+
+

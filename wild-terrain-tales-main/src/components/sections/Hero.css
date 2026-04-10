@@ -1,0 +1,423 @@
+/* =============================================
+   HERO — D'MARCOS
+   Replaces all inline styles & Tailwind utilities
+   ============================================= */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  /* --hero-font: 'Century Gothic Paneuropean Bold', 'Century Gothic Bold',
+    'Century Gothic Paneuropean', 'Century Gothic', CenturyGothic, sans-serif;
+  --hero-body-font: 'Space Grotesk', sans-serif; */
+
+  --hero-font: var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  --hero-body-font: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  /* 
+  --hero-title-size: clamp(4rem, 12vw, 11rem);
+  --hero-tagline-size: clamp(0.65rem, 1.2vw, 0.875rem);
+  --hero-subtitle-size: clamp(0.85rem, 1.2vw, 1.125rem);
+  --hero-cta-size: clamp(0.6rem, 0.9vw, 0.75rem);
+  --hero-pb: clamp(5rem, 10vh, 10rem); */
+
+
+  /* Title scales purely with vw so it NEVER wraps */
+  --hero-title-size: clamp(2.8rem, 11.5vw, 11rem);
+
+  --hero-tagline-size: clamp(0.55rem, 1.5vw, 0.875rem);
+  --hero-subtitle-size: clamp(0.85rem, 1.3vw, 1.125rem);
+  --hero-cta-size: clamp(0.6rem, 1vw, 0.75rem);
+  --hero-pb: clamp(5rem, 12vh, 10rem);
+}
+
+/* ---------- Section ---------- */
+.hero {
+  position: relative;
+  height: 110vh;
+  /* svh = safe viewport height, avoids iOS address bar jump */
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ---------- Parallax background wrapper ---------- */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  /* GPU layer — prevents scroll jank */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ---------- Hero image ---------- */
+.hero__img {
+  height: 110vh;
+  width: 100%;
+  object-fit: cover;
+  /* Prevent sub-pixel bleed during scale transform */
+  display: block;
+  /* Prioritise decode so the image doesn't block paint */
+  content-visibility: auto;
+}
+
+/* ---------- Gradient overlays ---------- */
+.hero__gradient-lr {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+      rgba(var(--background-rgb, 0 0 0) / 0.8) 0%,
+      rgba(var(--background-rgb, 0 0 0) / 0.4) 40%,
+      transparent 100%);
+}
+
+.hero__gradient-tb {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+      var(--background, #0a0a0a) 0%,
+      transparent 50%,
+      rgba(var(--background-rgb, 10 10 10) / 0.2) 100%);
+}
+
+/* ---------- Grain overlay ---------- */
+.hero__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 20;
+  /* Static SVG noise — no JS, no extra file */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  /* Cache the grain on the GPU — no repaint on scroll */
+  /* will-change: auto; */
+  transform: translateZ(0);
+}
+
+/* ---------- Content block ---------- */
+.hero__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: var(--hero-pb);
+  padding-left: var(--section-px, 1.25rem);
+  padding-right: var(--section-px, 1.25rem);
+  /* Framer controls transform & opacity — keep layer stable */
+  will-change: transform, opacity;
+}
+
+.hero__content-inner {
+  max-width: 62rem;
+  /* ~5xl */
+  /* margin-left: 6rem; */
+}
+
+/* ---------- Gold rule ---------- */
+.hero__rule {
+  width: 5rem;
+  height: 2px;
+  background-color: #cc9433;
+  margin-bottom: 2.5rem;
+  transform-origin: left center;
+  /* Framer drives scaleX — no extra will-change needed */
+}
+
+/* ---------- Title overflow mask ---------- */
+.hero__title-wrap {
+  overflow: hidden;
+  /* padding-right: 1rem; */
+  max-width: 100%;
+}
+
+/* ---------- Title ---------- */
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--hero-title-size);
+  text-transform: uppercase;
+  color: white;
+  /* letter-spacing: -0.01em; */
+  line-height: 0.85;
+  white-space: nowrap;
+  width: max-content;
+}
+
+/* Each letter is a span — keep inline-block for Framer y transforms */
+.hero__title span {
+  font-family: var(--font-display);
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+/* ---------- Tagline ---------- */
+.hero__tagline {
+  font-family: var(--font-display);
+  margin-top: 1.5rem;
+  font-size: 16px;
+  font-weight: 400;
+  color: #cc9433;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  will-change: transform, opacity;
+
+  /* Prevent letter-spacing from causing overflow on small screens */
+  word-break: normal;
+  overflow: hidden;
+}
+
+.hero__tagline-bold {
+  color: #cc9433;
+  font-weight: 900;
+
+}
+
+/* ---------- Subtitle ---------- */
+.hero__subtitle {
+  margin-top: 1.5rem;
+  font-family: var(--hero-body-font);
+  font-size: var(--hero-subtitle-size);
+  color: rgba(var(--foreground-rgb, 255 255 255) / 0.7);
+  max-width: 32rem;
+  line-height: 1.6;
+  will-change: transform, opacity;
+}
+
+/* ---------- CTA row ---------- */
+.hero__cta {
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+
+.hero__cta-label {
+  font-family: var(--hero-body-font);
+  font-size: var(--hero-cta-size);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(var(--foreground-rgb, 255 255 255) / 0.6);
+  transition: color 300ms ease;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.hero__cta:hover .hero__cta-label {
+  color: var(--gold, #cc9433);
+}
+
+.hero__cta-line {
+  width: 3rem;
+  height: 1px;
+  background-color: rgba(var(--foreground-rgb, 255 255 255) / 0.3);
+  transition: background-color 500ms ease, width 500ms ease;
+}
+
+.hero__cta:hover .hero__cta-line {
+  background-color: var(--gold, #cc9433);
+  width: 5rem;
+}
+
+/* ---------- Scroll indicator ---------- */
+.hero__scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 20;
+}
+
+.hero__scroll-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(var(--foreground-rgb, 255 255 255) / 0.4);
+  font-weight: 500;
+}
+
+.hero__scroll-track {
+  width: 1px;
+  height: 4rem;
+  background-color: rgba(var(--foreground-rgb, 255 255 255) / 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-thumb {
+  width: 100%;
+  height: 1.25rem;
+  background-color: rgba(var(--gold-rgb, 201 168 76) / 0.6);
+  /* Framer drives the y animation */
+  will-change: transform;
+}
+
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+ 
+/* ── Tiny phones < 360px ── */
+@media (max-width: 359px) {
+  :root {
+    --hero-title-size:    clamp(2.2rem, 12vw, 3rem);
+    --hero-pb:            4.5rem;
+    --hero-tagline-size:  0.5rem;
+    --hero-subtitle-size: 0.8rem;
+  }
+  .hero__rule { margin-bottom: 1.25rem; width: 3rem; }
+  .hero__subtitle { max-width: 100%; }
+  .hero__scroll { bottom: 1rem; }
+}
+ 
+/* ── Small phones 360–479px (matches Image 1 — iPhone) ── */
+@media (min-width: 360px) and (max-width: 479px) {
+  :root {
+    --hero-title-size:    clamp(2.6rem, 11.5vw, 4rem);
+    --hero-pb:            5rem;
+    --hero-tagline-size:  0.55rem;
+    --hero-subtitle-size: 0.875rem;
+  }
+  .hero__rule { margin-bottom: 1.5rem; width: 3.5rem; }
+  .hero__subtitle { max-width: 100%; }
+  .hero__scroll { bottom: 1.5rem; }
+  .hero__cta { margin-top: 1.5rem; }
+}
+ 
+/* ── Mid phones 480–639px (matches Image 2 — Android) ── */
+@media (min-width: 480px) and (max-width: 639px) {
+  :root {
+    --hero-title-size:    clamp(3rem, 10.5vw, 5rem);
+    --hero-pb:            5.5rem;
+    --hero-tagline-size:  0.6rem;
+    --hero-subtitle-size: 0.9rem;
+  }
+  .hero__subtitle { max-width: 100%; }
+}
+ 
+/* ── Tablet 640–1023px ── */
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root {
+    --hero-title-size:    clamp(4rem, 10vw, 7rem);
+    --hero-pb:            7rem;
+    --hero-tagline-size:  0.7rem;
+    --hero-subtitle-size: 1rem;
+  }
+}
+ 
+/* ── Desktop ≥ 1024px ── */
+@media (min-width: 1024px) {
+  :root {
+    --hero-pb:            10rem;
+    --hero-title-size:    clamp(6rem, 10vw, 11rem);
+  }
+}
+ 
+/* ── Landscape mode on phones ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  :root {
+    --hero-pb: 2rem;
+    --hero-title-size: clamp(2rem, 8vh, 4rem);
+  }
+  .hero__scroll { display: none; }
+  .hero__subtitle { display: none; }
+}
+ 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero__title span,
+  .hero__tagline,
+  .hero__subtitle,
+  .hero__cta,
+  .hero__scroll-thumb,
+  .hero__bg {
+    will-change: auto;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ==============================================
+   RESPONSIVE — Mobile  (≤ 640 px)
+   ============================================== */
+/* @media (max-width: 540px) {
+  :root {
+    --hero-pb: 6rem;
+    --hero-title-size: clamp(3.2rem, 18vw, 4.5rem);
+    --hero-tagline-size: 0.6rem;
+    --hero-subtitle-size: 0.875rem;
+  } */
+
+  /* .hero__title { */
+    /* Allow wrapping only if absolutely necessary on tiny screens */
+    /* white-space: normal;
+    word-break: break-word;
+    line-height: 0.88;
+  } */
+
+  /* .hero__subtitle {
+    max-width: 100%;
+  }
+
+  .hero__rule {
+    margin-bottom: 1.5rem;
+    width: 3.5rem;
+  }
+
+  .hero__scroll {
+    bottom: 1.5rem;
+  }
+} */
+
+/* ==============================================
+   RESPONSIVE — Tablet  (641 px – 1023 px)
+   ============================================== */
+/* @media (min-width: 641px) and (max-width: 1023px) {
+  :root {
+    --hero-title-size: clamp(5rem, 13vw, 8rem);
+    --hero-pb: 8rem;
+  }
+
+  .hero__title {
+    white-space: nowrap;
+  }
+} */
+
+/* ==============================================
+   RESPONSIVE — Desktop  (≥ 1024 px)
+   ============================================== */
+/* @media (min-width: 1024px) {
+  :root {
+    --hero-pb: 10rem;
+  }
+} */
+
+/* ==============================================
+   PERFORMANCE — Reduced motion
+   ============================================== */
+/* @media (prefers-reduced-motion: reduce) {
+
+  .hero__title span,
+  .hero__tagline,
+  .hero__subtitle,
+  .hero__cta,
+  .hero__scroll-thumb {
+    will-change: auto;
+    animation: none !important;
+    transition: none !important;
+  }
+} */

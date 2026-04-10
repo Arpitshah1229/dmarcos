@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+
+  <!-- 1. Viewport — critical for mobile rendering -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- 2. Theme color — matches your dark background -->
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- TODO: Set the document title to the name of your application -->
+  <title>D'MARCOS</title>
+  <meta name="description" content="D'MARCOS - India's first true Utility-Lifestyle brand" />
+  <meta name="author" content="D'MARCOS" />
+
+  <!-- 3. Preconnect to Google Fonts (zero RTT cost) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- 4. Space Grotesk — body font — load early -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!--
+  5. Hero image preload — THIS is the biggest win for
+     perceived load time. The browser starts fetching
+     the hero image in parallel with HTML parsing.
+     Update the href to match your actual built asset path.
+-->
+  <link rel="preload" as="image" href="/assets/hero-terrian.webp" fetchpriority="high" type="image/webp" />
+
+
+
+
+  <!-- ✅ ADD THIS (your favicon) -->
+  <link rel="icon" type="image/png" href="/logo1.svg" />
+
+  <!-- TODO: Update og:title to match your application name -->
+  <meta property="og:title" content="D'MARCOS" />
+  <meta property="og:description" content="D'MARCOS - India's first true Utility-Lifestyle brand" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="logo1.svg" />
+<!-- 
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@Lovable" />
+  <meta name="twitter:image" content="logo1.svg" /> -->
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

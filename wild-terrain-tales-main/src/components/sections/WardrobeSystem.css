@@ -1,0 +1,184 @@
+/* =============================================
+   WARDROBE SYSTEM — D'MARCOS  (REVISED)
+   ============================================= */
+
+:root {
+  --ws-font-display: var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  --ws-font-body:    var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  --ws-building-size: clamp(1.2rem, 3.5vw, 3.75rem);
+  --ws-who-size:      clamp(3.5rem, 9vw, 11rem);
+  --ws-body-size:     clamp(0.95rem, 1.2vw, 1.3125rem);
+  --ws-list-size:     clamp(0.95rem, 1.2vw, 1.25rem);
+  --ws-target-size:   clamp(0.85rem, 1vw, 1.0625rem);
+  --ws-py:            clamp(4rem, 8vw, 8rem);
+}
+
+.wardrobe { padding: var(--ws-py) var(--section-px, 1.25rem); }
+
+.wardrobe__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ── Image ── */
+.wardrobe__img-wrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+.wardrobe__img {
+  height: 120%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  content-visibility: auto;
+}
+
+.wardrobe__img-wipe {
+  position: absolute;
+  inset: 0;
+  background-color: var(--background, #0a0a0a);
+  transform-origin: right center;
+  will-change: transform;
+}
+
+.wardrobe__img-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(var(--background-rgb,10 10 10)/.6) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ── Content ── */
+.wardrobe__content { display: flex; flex-direction: column; }
+
+.wardrobe__heading-block { margin-bottom: 2.5rem; will-change: transform, opacity; }
+
+.wardrobe__building-for {
+  font-size: var(--ws-building-size);
+  color: #cc9433;
+  line-height: 1;
+  margin-bottom: 0;
+  will-change: transform, opacity;
+}
+
+.wardrobe__who {
+  font-family: var(--ws-font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  font-weight: 700;
+  font-size: var(--ws-who-size);
+  text-transform: uppercase;
+  color: var(--foreground, #f5f5f0);
+  line-height: 0.85;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  will-change: transform, opacity;
+  /* Prevent overflow on small screens */
+  word-break: break-word;
+}
+
+.wardrobe__blocks { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.wardrobe__divider { border: none; border-top: 1px solid rgba(var(--foreground-rgb,245 245 240)/.3); }
+
+.wardrobe__clarity {
+  font-family: var(--ws-font-body);
+  font-size: var(--ws-body-size);
+  color: rgba(255 255 255/.95);
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  will-change: transform, opacity;
+}
+
+.wardrobe__not-heading {
+  font-family: var(--ws-font-display);
+  font-size: clamp(1.1rem,2.2vw,1.875rem);
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  padding-top: 0.75rem;
+  color: var(--foreground, #f5f5f0);
+  will-change: transform, opacity;
+}
+
+.wardrobe__strike-item {
+  font-size: var(--ws-list-size);
+  color: rgba(var(--foreground-rgb,245 245 240)/.85);
+  line-height: 1.6;
+  margin-bottom: 0.4rem;
+  will-change: transform, opacity;
+}
+
+.wardrobe__strike-wrap { position: relative; display: inline-block; cursor: pointer; }
+
+.wardrobe__strike-line {
+  position: absolute;
+  left: 0; top: 50%;
+  height: 1px;
+  width: 100%;
+  background-color: #cc9433;
+  transform-origin: left center;
+}
+
+.wardrobe__design-for {
+  font-family: var(--ws-font-body);
+  font-size: clamp(1rem,1.4vw,1.5625rem);
+  color: rgba(255 255 255/.9);
+  line-height: 1.5;
+  will-change: transform, opacity;
+}
+
+.wardrobe__accent { color: #cc9433; font-weight: 700; }
+
+.wardrobe__target-heading {
+  font-family: var(--ws-font-display);
+  font-size: clamp(1.1rem,2.2vw,1.875rem);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  color: var(--foreground, #f5f5f0);
+  will-change: transform, opacity;
+}
+
+.wardrobe__target-item {
+  font-family: var(--ws-font-body);
+  font-size: var(--ws-target-size);
+  color: rgba(255 255 255/.8);
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  will-change: transform, opacity;
+}
+
+/* RESPONSIVE */
+@media (max-width: 359px) {
+  :root { --ws-building-size: clamp(1rem,6vw,1.8rem); --ws-who-size: clamp(3rem,16vw,5rem); --ws-body-size: 0.875rem; --ws-py: 3rem; }
+  .wardrobe__grid { gap: 2rem; }
+  .wardrobe__who { margin-left: 0.25rem; }
+  .wardrobe__img-wrap { aspect-ratio: 4/3; }
+}
+
+@media (min-width: 360px) and (max-width: 479px) {
+  :root { --ws-building-size: clamp(1.1rem,6vw,2rem); --ws-who-size: clamp(3.2rem,15vw,5.5rem); --ws-body-size: 0.9rem; --ws-py: 3.5rem; }
+  .wardrobe__grid { gap: 2.5rem; }
+  .wardrobe__who { margin-left: 0.25rem; }
+  .wardrobe__img-wrap { aspect-ratio: 4/3; }
+}
+
+@media (min-width: 480px) and (max-width: 639px) {
+  :root { --ws-building-size: clamp(1.3rem,5vw,2.5rem); --ws-who-size: clamp(4rem,13vw,7rem); --ws-body-size: 0.95rem; }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root { --ws-building-size: clamp(1.5rem,4vw,3rem); --ws-who-size: clamp(5rem,11vw,8rem); --ws-body-size: 1rem; }
+  .wardrobe__grid { gap: 3rem; }
+}
+
+@media (min-width: 1024px) {
+  .wardrobe__grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wardrobe__img, .wardrobe__img-wrap, .wardrobe__strike-line { will-change: auto; }
+}

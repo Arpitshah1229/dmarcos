@@ -1,0 +1,153 @@
+/* =============================================
+   UTILITY LIFESTYLE — D'MARCOS  (REVISED)
+   ============================================= */
+
+:root {
+  --ul-font-display: var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  --ul-font-body:    var(--font-body, 'Space Grotesk', sans-serif);
+  --ul-title-size:   clamp(2rem, 6vw, 4.5rem);
+  --ul-tagline-size: clamp(0.875rem, 3vw, 5rem);
+  --ul-sub-size:     clamp(1rem, 4vw, 7rem);
+  --ul-label-size:   clamp(0.65rem, 0.85vw, 0.875rem);
+  --ul-py:           clamp(4rem, 8vw, 8rem);
+}
+
+.utility-lifestyle {
+  padding: var(--ul-py) var(--section-px, 1.25rem);
+  position: relative;
+  overflow: hidden;
+  isolation: auto; /* Ensure this section is never isolated — breaks parallax */
+}
+
+.utility-lifestyle__bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, hsl(140 20% 6%) 0%, var(--background,#0a0a0a) 50%, var(--background,#0a0a0a) 100%);
+  pointer-events: none;
+}
+
+.utility-lifestyle__inner { position: relative; z-index: 10; width: 100%; max-width: 80rem; margin: 0 auto; }
+
+.utility-lifestyle__header { text-align: center; margin-bottom: 1rem;}
+
+.utility-lifestyle__tagline {
+  font-family: var(--ul-font-body,bold, 'Space Grotesk', sans-serif);
+  font-size: var(--ul-tagline-size);
+  font-weight: 500;
+  color: #cc9433;
+  margin-bottom: 1rem;
+  will-change: transform, opacity;
+}
+
+.utility-lifestyle__title {
+  font-family: var(--ul-font-display);
+  font-size: var(--ul-title-size);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--foreground, #f5f5f0);
+  overflow: hidden;
+}
+
+.utility-lifestyle__title span {
+  display: inline-block;
+  margin-right: 0.25em;
+  will-change: transform, opacity;
+}
+
+.utility-lifestyle__subtitle {
+  font-size: var(--ul-sub-size);
+  color: rgba(var(--foreground-rgb,245 245 240)/.6);
+  margin-top: 1rem;
+  font-weight: 300;
+  will-change: transform, opacity;
+}
+
+.utility-lifestyle__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 3rem;
+   /* Always render all grid items */
+  align-items: start;
+}
+
+.utility-lifestyle__card { cursor: pointer; will-change: transform, opacity, filter; min-height: 0;}
+
+.utility-lifestyle__img-ratio {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  position: relative;
+  contain: layout style;
+}
+
+.utility-lifestyle__img {
+  height: 120%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 700ms ease;
+  will-change: transform;
+  /* content-visibility: auto; */
+}
+
+.utility-lifestyle__card:hover .utility-lifestyle__img { transform: scale(1.05); }
+
+.utility-lifestyle__wipe {
+  position: absolute;
+  inset: 0;
+  background-color: var(--background, #0a0a0a);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.utility-lifestyle__tint {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  transition: background-color 500ms ease;
+}
+
+.utility-lifestyle__card:hover .utility-lifestyle__tint { background-color: rgba(var(--gold-rgb,201 168 76)/.1); }
+
+.utility-lifestyle__label {
+  font-family: var(--ul-font-body);
+  font-size: var(--ul-label-size);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-align: center;
+  color: rgba(255 255 255/.7);
+  transition: color 300ms ease;
+  will-change: transform, opacity;
+}
+
+.utility-lifestyle__card:hover .utility-lifestyle__label { color: var(--gold, #cc9433); }
+
+/* RESPONSIVE */
+@media (max-width: 359px) {
+  :root { --ul-title-size: clamp(1.8rem,11vw,2.8rem); --ul-py: 3rem; }
+  .utility-lifestyle__grid { gap: 0.5rem; margin-top: 2rem; }
+}
+
+@media (min-width: 360px) and (max-width: 479px) {
+  :root { --ul-title-size: clamp(2rem,10vw,3rem); --ul-py: 3.5rem; }
+  .utility-lifestyle__grid { gap: 0.5rem; margin-top: 2.5rem; }
+}
+
+@media (min-width: 480px) and (max-width: 639px) {
+  :root { --ul-title-size: clamp(2.2rem,8vw,3.5rem); }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root { --ul-title-size: clamp(2.5rem,6.5vw,4rem); }
+  .utility-lifestyle__grid { grid-template-columns: repeat(4,1fr); gap: 1rem; }
+}
+
+@media (min-width: 1024px) {
+  .utility-lifestyle__grid { grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .utility-lifestyle__img, .utility-lifestyle__card { will-change: auto; transition: none; }
+}

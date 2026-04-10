@@ -1,0 +1,147 @@
+/* =============================================
+   BRAND VIDEO — D'MARCOS  (REVISED)
+   ============================================= */
+
+.brand-video {
+  /* min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000; */
+
+  /* No min-height — section itself IS the video */
+  width: 100%;
+  background-color: #000;
+  /* Break out of any section padding */
+  overflow: hidden;
+}
+
+.brand-video__wrap {
+  width: 100%;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+.brand-video__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  object-position: center center;
+
+  display: block;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.brand-video__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0 0 0 / 0.2);
+  pointer-events: none;
+}
+
+.brand-video__label {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+}
+
+
+
+/* Mobile — ensure truly full screen */
+@media (max-width: 639px) {
+  .brand-video__wrap {
+    /* Use 100dvh as fallback for browsers that don't support svh */
+    height: 100dvh;
+    height: 100svh;
+  }
+}
+ 
+@media (max-height: 500px) and (orientation: landscape) {
+  .brand-video__wrap { height: 100svh; }
+}
+ 
+
+
+
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-video__wrap {
+    will-change: auto;
+  }
+}
+
+
+
+
+
+
+/* =============================================
+   BRAND VIDEO — D'MARCOS
+   ============================================= */
+
+/* ── Section ── */
+/* .brand-video {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+} */
+
+/* ── Motion wrapper — Framer drives opacity + scale ── */
+/* .brand-video__wrap {
+  width: 100%;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+  will-change: transform, opacity;
+} */
+
+/* ── Video ── */
+/* .brand-video__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block; */
+/* GPU layer — eliminates paint on play */
+/* transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+} */
+
+/* ── Dark overlay for premium feel ── */
+/* .brand-video__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0 0 0 / 0.2);
+  pointer-events: none;
+} */
+
+/* ── Optional bottom label ── */
+/* .brand-video__label {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+} */
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+/* Mobile ≤ 640px */
+/* @media (max-width: 640px) {
+  .brand-video__wrap {
+    height: 100svh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-video__wrap {
+    will-change: auto;
+  }
+} */
