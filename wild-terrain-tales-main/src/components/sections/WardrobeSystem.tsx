@@ -104,7 +104,7 @@ const WardrobeSystem = () => {
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 1 }}
               >
-                What We Are Not —
+                What We Are Not
               </motion.h3>
 
               {[
@@ -148,9 +148,9 @@ const WardrobeSystem = () => {
                 transition={{ duration: 1, delay: 0.6 }}
               >
                 We design for{" "}
-                <span className="wardrobe__accent">repeat wear</span>,{" "}
-                <span className="wardrobe__accent">long life</span>, and{" "}
-                <span className="wardrobe__accent">everyday relevance</span>.
+                <span className="wardrobe__white">repeat wear</span>,{" "}
+                <span className="wardrobe__white">long life</span>, and{" "}
+                <span className="wardrobe__white">everyday relevance</span>.
               </motion.p>
 
               {/* Target Customer */}
@@ -164,9 +164,9 @@ const WardrobeSystem = () => {
               </motion.h3>
 
               {[
-                <>Urban men and women (early 20s – mid 60s) in <span className="wardrobe__accent">Tier-1 and Tier-2 cities</span></>,
-                <>Consumers who prioritize <span className="wardrobe__accent">product quality, durability, and repeat usability</span></>,
-                <>Customers who prefer <span className="wardrobe__accent">timeless design and function</span> over trend-driven fashion</>,
+                <>Urban men and women (early 20s – mid 60s) in <span className="wardrobe__target-item">Tier-1 and Tier-2 cities</span></>,
+                <>Consumers who prioritize <span className="wardrobe__target-item">product quality, durability, and repeat usability</span></>,
+                <>Customers who prefer <span className="wardrobe__target-item">timeless design and function</span> over trend-driven fashion</>,
               ].map((line, i) => (
                 <motion.p
                   key={i}

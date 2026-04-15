@@ -90,7 +90,7 @@
   font-size: var(--ws-body-size);
   color: rgba(255 255 255/.95);
   line-height: 1.6;
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   will-change: transform, opacity;
 }
 
@@ -98,17 +98,18 @@
   font-family: var(--ws-font-display);
   font-size: clamp(1.1rem,2.2vw,1.875rem);
   font-weight: 900;
-  margin-bottom: 0.5rem;
-  padding-top: 0.75rem;
+  /* margin-bottom: 0.5rem; */
+  /* padding-top: 0.75rem; */
   color: var(--foreground, #f5f5f0);
   will-change: transform, opacity;
 }
 
 .wardrobe__strike-item {
+  font-family: var(--ws-font-body);
   font-size: var(--ws-list-size);
   color: rgba(var(--foreground-rgb,245 245 240)/.85);
-  line-height: 1.6;
-  margin-bottom: 0.4rem;
+  line-height: 1.2;
+  /* margin-bottom: 0.4rem; */
   will-change: transform, opacity;
 }
 
@@ -125,29 +126,32 @@
 
 .wardrobe__design-for {
   font-family: var(--ws-font-body);
-  font-size: clamp(1rem,1.4vw,1.5625rem);
+  /* font-size: clamp(1rem,1.4vw,1.5625rem); */
+  font-size: var(--ws-body-size);
   color: rgba(255 255 255/.9);
   line-height: 1.5;
   will-change: transform, opacity;
 }
 
 .wardrobe__accent { color: #cc9433; font-weight: 700; }
+.wardrobe__white { color: #fff; font-weight: 700; }
 
 .wardrobe__target-heading {
   font-family: var(--ws-font-display);
   font-size: clamp(1.1rem,2.2vw,1.875rem);
   font-weight: 900;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   color: var(--foreground, #f5f5f0);
   will-change: transform, opacity;
 }
 
 .wardrobe__target-item {
   font-family: var(--ws-font-body);
-  font-size: var(--ws-target-size);
+  /* font-size: var(--ws-target-size); */
+  font-size: var(--ws-list-size);
   color: rgba(255 255 255/.8);
-  line-height: 1.4;
-  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  /* margin-bottom: 0.5rem; */
   will-change: transform, opacity;
 }
 

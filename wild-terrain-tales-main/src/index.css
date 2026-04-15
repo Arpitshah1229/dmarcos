@@ -1,15 +1,9 @@
-/* =============================================
-   index.css — D'MARCOS
-   Original file restored.
-   Only 3 changes from your original:
-   1. @import for Space Grotesk moved to line 1
-      (browsers ignore @import after any other rule)
-   2. --font-display fixed (was FoundersGroteskXCondensed
-      which is never loaded — now Century Gothic stack)
-   3. Old commented-out duplicate block at bottom removed
-   ============================================= */
 
-/* MUST be first — browsers ignore @import after any other statement */
+   /* index.css — D'MARCOS */
+  
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -57,7 +51,7 @@
     --sky: 200 25% 45%;
     --gold: 38 60% 50%;
 
-    /* Raw hex/rgb tokens used directly in component .css files */
+  
     --gold-hex:       #cc9433;
     --gold-rgb:       204 148 51;
     --background-hex: #0a0a0a;
@@ -65,11 +59,6 @@
     --foreground-hex: #f0ebe0;
     --foreground-rgb: 240 235 224;
 
-    /* Font stacks
-       FIXED: was 'FoundersGroteskXCondensed' — that font is not
-       loaded anywhere, so every device fell back to Arial.
-       Now points to Century Gothic with a full cross-platform
-       fallback so Android/Windows render correctly.           */
     --font-display:
       'Century Gothic Bold',
       'Century Gothic',
@@ -94,7 +83,7 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 217.2 91.2% 59.8%; 
   }
 }
 
@@ -128,7 +117,7 @@
   }
 
   .text-display {
-    font-family: var(--font-display);
+    font-family: var(--font-display); 
     @apply tracking-tight font-bold;
   }
 

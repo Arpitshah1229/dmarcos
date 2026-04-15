@@ -1,57 +1,258 @@
 /* =============================================
-   LOOKBOOK — D'MARCOS  (FIXED)
-
-   ROOT CAUSE OF BLACK GAP + SCROLL NOT WORKING:
-   - App.css had #root { max-width: 1280px; padding: 2rem }
-     which clipped the sticky container and broke scroll math.
-   - backdrop-filter: blur() on cards caused GPU layer conflicts
-     with the sticky scroll, making it appear blank/black.
-   - The sticky container needs to be FULL viewport width with
-     NO ancestor padding or max-width constraints.
+   LOOKBOOK — D'MARCOS (STICKY SCROLL VERSION)
    ============================================= */
 
 :root {
-  --lb-font: var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  --lb-font:     var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
   --lb-title-sz: clamp(16vw, 19vw, 20vw);
-  /* --lb-title-sz: clamp(3rem, 12vw, 8rem); */
-  --lb-card-w: 30vw;
-  --lb-card-h: 70vh;
-  --lb-gap: 1rem;
+  --lb-card-w:   28vw;
+  --lb-card-h:   66vh;
+  --lb-gap:      2.5rem;
 }
 
-/* ── Section — must be full viewport width ── */
+/* 
+   IMPORTANT: Parent sections must have overflow: visible
+   for position: sticky to work. 
+*/
 .lookbook {
-  /* padding: 40px; */
   padding: 0;
   margin: 0;
-  
-  /* Break out of any ancestor padding */
-  margin-left: calc(-1 * var(--section-px, 0px));
-  margin-right: calc(-1 * var(--section-px, 0px));
-
-  width: 100vw;
-
-  overflow-x: hidden;
+  width: 100%;
+  overflow: visible !important; 
+  background-color: #0a0a0a;
+  position: relative;
 }
 
 /* ── Hero video panel ── */
 .lookbook__hero {
   position: relative;
-  /* Use 100vw so the video always fills the screen edge-to-edge */
-  width: 100vw;
+  width: 100%;
   height: 100svh;
   overflow: hidden;
-
-  /* Compensate for any parent padding using negative margins */
-  margin-left: calc(-1 * var(--section-px, 0px));
-  margin-right: calc(-1 * var(--section-px, 0px));
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  z-index: 1;
 }
 
 .lookbook__hero-scale {
+  height: 100%;
+  width: 100%;
+}
+
+.lookbook__video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lookbook__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+.lookbook__title-block {
+  position: absolute;
+  bottom: 10%;
+  left: 2rem;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.lookbook__word-row {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.82;
+}
+
+.lookbook__word {
+  font-family: var(--lb-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: var(--lb-title-sz);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.lookbook__word span {
+  display: inline-block;
+}
+
+.lookbook__divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform-origin: left center;
+}
+
+/* ============================================================
+   STICKY SCROLL AREA
+   ============================================================ */
+
+.lookbook__sticky-container {
+  position: relative;
+  width: 100%;
+  /* 
+     Height is the 'track' for the sticky section.
+     Adjusting to 500vh to give exactly enough scroll-room 
+     without feeling like it's dragging too long.
+  */
+  height: 500vh; 
+  background-color: #0a0a0a;
+  overflow: visible !important;
+}
+
+.lookbook__sticky-viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100vw; /* Using literal vw to avoid parent constraints */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  background-color: #0a0a0a;
+}
+
+.lookbook__strip {
+  display: flex;
+  gap: var(--lb-gap);
+  padding: 0 4rem;
+  will-change: transform;
+  flex-wrap: nowrap;
+  pointer-events: auto;
+}
+
+/* ── Cards ── */
+.lookbook__card {
+  flex-shrink: 0;
+  width: var(--lb-card-w);
+  height: var(--lb-card-h);
+  overflow: hidden;
+  border-radius: 0.25rem;
+  background-color: #111;
+  box-shadow: 0 20px 60px -10px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.02);
+  transition: border-color 0.4s ease, transform 0.4s ease;
+}
+
+.lookbook__card:hover {
+  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-5px);
+}
+
+.lookbook__card-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lookbook__card:hover .lookbook__card-img {
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  :root { 
+    --lb-card-w: 45vw; 
+    --lb-card-h: 60vh; 
+    --lb-gap: 2rem; 
+  }
+}
+
+@media (max-width: 768px) {
+  :root { 
+    --lb-title-sz: 22vw; 
+    --lb-card-w: 75vw; 
+    --lb-card-h: 55vh; 
+    --lb-gap: 1.5rem; 
+  }
+  .lookbook__sticky-container {
+    height: 400vh; 
+  }
+  .lookbook__strip {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lookbook__card, .lookbook__card-img, .lookbook__strip {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =============================================
+   LOOKBOOK — D'MARCOS  (DEFINITIVE FIX)
+
+   GAP ROOT CAUSE:
+   The -50vw centering trick on .lookbook__hero
+   uses "left: 50%; margin-left: -50vw" which works
+   when the element is position:relative. But because
+   .lookbook has no explicit position set, the "left"
+   property has no effect on a static element —
+   only the margins apply, shifting content and
+   creating the gap.
+
+   FINAL APPROACH: Don't use the -50vw trick at all.
+   Instead the entire <section> gets negative margins
+   to break out of parent padding, and everything
+   inside is naturally full-width.
+   ============================================= */
+
+/* :root {
+  --lb-font:     var(--font-display, 'Century Gothic Bold', 'Trebuchet MS', sans-serif);
+  --lb-title-sz: clamp(16vw, 19vw, 20vw);
+  --lb-card-w:   30vw;
+  --lb-card-h:   70vh;
+  --lb-gap:      1rem;
+} */
+
+/* ── Section — full bleed breakout ── */
+/* .lookbook {
+  padding: 0;
+  margin: 0;
+ 
+  margin-left: calc(-1 * var(--section-px, 0px));
+  margin-right: calc(-1 * var(--section-px, 0px));
+  width: 100vw;
+  overflow: hidden;
+ 
+} */
+
+/* ── Hero video panel ── */
+/* .lookbook__hero {
+  position: relative;
+  width: 100%;          
+  height: 100svh;
+  overflow: hidden;
+  
+} */
+
+/* .lookbook__hero-scale {
   height: 100%;
   width: 100%;
   will-change: transform;
@@ -62,9 +263,7 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-
   object-position: center center;
-
   display: block;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
@@ -73,23 +272,22 @@
 .lookbook__hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right,
-      rgba(0 0 0 / 0.2) 0%,
-      transparent 50%,
-      rgba(0 0 0 / 0.5) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(0 0 0 / 0.15) 0%,
+    transparent 50%,
+    rgba(0 0 0 / 0.4) 100%
+  );
   pointer-events: none;
-}
+} */
 
-/* ── LOOK / BOOK giant title ── */
-.lookbook__title-block {
+/* ── LOOK / BOOK title ── */
+/* .lookbook__title-block {
   position: absolute;
   bottom: 10%;
   left: 1.5rem;
-  /* Prevent title from causing horizontal overflow */
   overflow: hidden;
-
   pointer-events: none;
-
 }
 
 .lookbook__word-row {
@@ -100,12 +298,11 @@
 
 .lookbook__word {
   font-family: var(--lb-font);
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
   color: #fff;
   font-size: var(--lb-title-sz);
   letter-spacing: -0.01em;
-  /* Each word must stay on one line */
   white-space: nowrap;
 }
 
@@ -124,76 +321,61 @@
   background-color: rgba(255 255 255 / 0.3);
   transform-origin: left center;
   will-change: transform;
-}
+} */
 
 /* ============================================================
    STICKY HORIZONTAL CAROUSEL
-   CRITICAL RULES:
-   1. The outer container (.lookbook__sticky-container) must be
-      EXACTLY 100vw wide with NO padding inherited from parents.
-   2. The sticky viewport must use position:sticky correctly —
-      it needs a defined height (100svh) and overflow:hidden.
-   3. The strip uses will-change:transform for GPU compositing.
-   4. NO backdrop-filter on cards — it breaks GPU layer order.
+
+   CRITICAL: The sticky container must be a direct child of
+   .lookbook (which is 100vw). It must NOT have any margin
+   tricks — those are already handled by .lookbook itself.
    ============================================================ */
 
-.lookbook__sticky-container {
+/* .lookbook__sticky-container {
   position: relative;
-  width: 100vw;
-  /* height: 300vh; */
-
-  height: calc(100vh + 100vw);
-  /* Ensure no padding from parent leaks in */
+  width: 100%;        
+  height: 300vh;
+  height: 100%;
   padding: 0;
   margin: 0;
-  /* left: 50%; */
-  /* right: 50%; */
-  /* margin-left: -50vw; */
-  /* margin-right: -50vw; */
-
 
   overflow: visible;
-   background-color: #0a0a0a;
+  background-color: #0a0a0a;
 }
 
 .lookbook__sticky-viewport {
   position: sticky;
   top: 0;
-  width: 100vw;
+  width: 100%;
   height: 100svh;
   overflow: hidden;
   display: flex;
   align-items: center;
-  /* Establish a new stacking context so GPU layers work correctly */
-  /* isolation: isolate; */
   background-color: #0a0a0a;
-}
+  
+} */
 
-/* ── Card strip — Framer drives the X transform ── */
-.lookbook__strip {
+/* ── Card strip ── */
+/* .lookbook__strip {
   display: flex;
   gap: var(--lb-gap);
-  /* Left padding so first card doesn't sit at edge */
-  /* padding: 0 1.5rem; */
   padding: 0 2rem;
   will-change: transform;
   transform: translateZ(0);
   flex-wrap: nowrap;
-  /* Width must be auto — let cards determine it */
   width: max-content;
-}
+} */
 
-/* ── Individual cards ── */
-.lookbook__card {
+/* ── Cards ── */
+/* .lookbook__card {
   flex-shrink: 0;
   width: var(--lb-card-w);
   height: var(--lb-card-h);
   overflow: hidden;
   border-radius: 0.75rem;
-  background-color: rgba(23 23 23 / 0.4);
+  background-color: #111;
   will-change: transform, opacity;
   transform: translateZ(0);
-  /* CRITICAL: NO backdrop-filter — causes black layer on mobile */
 }
 
 .lookbook__card-img {
@@ -202,107 +384,49 @@
   object-fit: cover;
   display: block;
   transition: transform 700ms ease-out;
-  /* will-change: transform; */
-  /* content-visibility: auto; */
 }
 
 .lookbook__card:hover .lookbook__card-img {
   transform: scale(1.05);
-}
+} */
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
 
-/* Tiny phones < 360px */
-@media (max-width: 359px) {
-  :root {
-    --lb-title-sz: 25vw;
-    --lb-card-w: 80vw;
-    --lb-card-h: 58vh;
-    --lb-gap: 0.6rem;
-  }
-
-  .lookbook__title-block {
-    bottom: 6%;
-    left: 0.75rem;
-  }
+/* @media (max-width: 359px) {
+  :root { --lb-title-sz: 24vw; --lb-card-w: 82vw; --lb-card-h: 56vh; --lb-gap: 0.6rem; }
+  .lookbook__title-block { bottom: 6%; left: 0.75rem; }
 }
 
-/* Small phones 360–479px */
 @media (min-width: 360px) and (max-width: 479px) {
-  :root {
-    /* --lb-title-sz: 24vw; */
-    --lb-title-sz: 23vw;
-    --lb-card-w: 75vw;
-    --lb-card-h: 60vh;
-    --lb-gap: 0.75rem;
-  }
-
-  .lookbook__title-block {
-    bottom: 8%;
-    left: 1rem;
-  }
+  :root { --lb-title-sz: 23vw; --lb-card-w: 78vw; --lb-card-h: 60vh; --lb-gap: 0.75rem; }
+  .lookbook__title-block { bottom: 8%; left: 1rem; }
 }
 
-/* Mid phones 480–639px */
 @media (min-width: 480px) and (max-width: 639px) {
-  :root {
-    /* --lb-title-sz: 22vw; */
-    --lb-title-sz: 21vw;
-    /* --lb-card-w: 60vw; */
-    --lb-card-w: 62vw;
-    --lb-card-h: 63vh;
-  }
-
-  .lookbook__title-block {
-    bottom: 8%;
-    left: 1.25rem;
-  }
+  :root { --lb-title-sz: 21vw; --lb-card-w: 62vw; --lb-card-h: 63vh; }
+  .lookbook__title-block { bottom: 8%; left: 1.25rem; }
 }
 
-/* Tablet 640–1023px */
 @media (min-width: 640px) and (max-width: 1023px) {
-  :root {
-    --lb-title-sz: 20vw;
-    --lb-card-w: 44vw;
-    --lb-card-h: 65vh;
-  }
-
-  .lookbook__title-block {
-    bottom: 5%;
-    left: 2rem;
-  }
+  :root { --lb-title-sz: 19vw; --lb-card-w: 44vw; --lb-card-h: 65vh; }
+  .lookbook__title-block { bottom: 5%; left: 2rem; }
 }
 
-/* Desktop ≥ 1024px */
 @media (min-width: 1024px) {
-  :root {
-    --lb-card-w: 30vw;
-    --lb-card-h: 70vh;
-  }
-
-  .lookbook__title-block {
-    bottom: 5%;
-    left: 3.75rem;
-  }
+  :root { --lb-card-w: 30vw; --lb-card-h: 70vh; }
+  .lookbook__title-block { bottom: 5%; left: 3.75rem; }
 }
 
-/* Landscape phones */
 @media (max-height: 500px) and (orientation: landscape) {
-  :root {
-    --lb-card-h: 80vh;
-    --lb-card-w: 38vw;
-  }
+  :root { --lb-card-h: 82vh; --lb-card-w: 36vw; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-
-  .lookbook__card-img,
-  .lookbook__strip,
-  .lookbook__video,
-  .lookbook__hero-scale {
+  .lookbook__card-img, .lookbook__strip,
+  .lookbook__video, .lookbook__hero-scale { 
     will-change: auto;
     transition: none;
   }
-}
+} */

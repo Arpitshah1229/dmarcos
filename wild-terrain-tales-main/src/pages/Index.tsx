@@ -1,4 +1,4 @@
-// import "../index.css"
+import "../index.css"
 import { useState, useCallback } from "react";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
@@ -27,7 +27,7 @@ const Index = () => {
       {loaded && (
         <SmoothScroll>
           {/* <main className="bg-background"> */}
-          <main style={{ width: "100%", overflowX: "hidden", backgroundColor: "#0a0a0a" }}>
+          <main style={{ width: "100%", backgroundColor: "#0a0a0a" }}>
             <Navbar />
             <Hero />
             <BrandVideo />

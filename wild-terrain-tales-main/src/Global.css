@@ -1,24 +1,16 @@
-/* =============================================
-   GLOBAL — D'MARCOS
-   global.css / index.css  (import this FIRST)
-   ============================================= */
 
-/* ── Google Fonts preconnect (add these tags to index.html too) ── */
+
 /* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap'); */
 
-/* ============================================================
-   FONT-FACE — Century Gothic safe cross-platform stack
-   Android does NOT ship Century Gothic. We define a fallback
-   chain so the display weight always renders correctly.
-   ============================================================ */
+
 @font-face {
   font-family: 'CenturyGothicFallback';
   src: local('Century Gothic'),
        local('CenturyGothic'),
        local('Century Gothic Bold'),
-       local('AppleGothic'),          /* iOS fallback              */
-       local('Gill Sans'),            /* macOS / older iOS         */
-       local('Trebuchet MS');         /* Windows / Android         */
+       local('AppleGothic'), 
+       local('Gill Sans'),            
+       local('Trebuchet MS');         
   font-weight: 700 900;
   font-style: normal;
   font-display: swap;
@@ -115,9 +107,9 @@ img, video {
    PERFORMANCE GLOBALS
    ============================================================ */
 
-/* Promote sections that use parallax to their own layers */
+/* Promotion of GPU layers if needed */
 section {
-  isolation: isolate;
+  position: relative;
 }
 
 /* Ensure videos never cause layout overflow */
@@ -153,11 +145,7 @@ video {
   visibility: visible;
 }
 
-/* ============================================================
-   RESPONSIVE HELPERS
-   ============================================================ */
 
-/* Only show on mobile */
 .mobile-only {
   display: block;
 }

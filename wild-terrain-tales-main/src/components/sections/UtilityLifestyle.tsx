@@ -87,7 +87,7 @@ const LifestyleCard = ({ ctx, index }: { ctx: typeof contexts[0]; index: number 
     <motion.div
       ref={cardRef}
       className="utility-lifestyle__card"
-      initial={{ opacity: 0, x: 80, filter: "blur(6px)" }}
+      initial={{ opacity: 1, x: 10, filter: "blur(0px)" }}
       animate={isCardInView ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
       transition={{ duration: 1.4, delay: 0.2 + index * 0.15, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
@@ -113,7 +113,7 @@ const LifestyleCard = ({ ctx, index }: { ctx: typeof contexts[0]; index: number 
 
       <motion.p
         className="utility-lifestyle__label"
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 1, y: 15 }}
         animate={isCardInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay: 0.6 + index * 0.15 }}
       >

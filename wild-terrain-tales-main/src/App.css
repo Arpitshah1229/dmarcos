@@ -1,12 +1,4 @@
-/* =============================================
-   App.css — D'MARCOS
-   IMPORTANT: The default Vite starter styles
-   (#root max-width, padding, text-align) have been
-   REMOVED. They were constraining the full-width
-   layout and causing the Lookbook black gap.
-   ============================================= */
- 
-/* #root must be full width, no padding, no max-width */
+
 #root {
   width: 100%;
   min-height: 100dvh;
